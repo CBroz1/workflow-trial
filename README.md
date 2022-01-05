@@ -4,14 +4,17 @@ This directory provides an example workflow to save the continuous behavior data
 + [element-lab](https://github.com/datajoint/element-lab)
 + [element-animal](https://github.com/datajoint/element-animal)
 + [element-session](https://github.com/datajoint/element-session)
-+ [element-behavior](https://github.com/datajoint/element-behavior)
 + [element-trial](https://github.com/datajoint/element-trial)
 
 This repository provides demonstrations for:
-Setting up a workflow using different elements (see [pipeline.py](workflow_trial/pipeline.py))
+1. Setting up a workflow using different elements (see [pipeline.py](workflow_trial/pipeline.py))
+2. Ingestion of data/metadata based on:
+    + predefined file/folder structure and naming convention
+    + predefined directory lookup methods (see [workflow_trial/paths.py](workflow_trial/paths.py))
+3. Ingestion of trialized continuous behavior.
 
 ## Workflow architecture
-The lab and animal management workflow presented here uses components from two DataJoint elements (element-lab, element-animal and element-session) assembled together to a functional workflow.
+The trialized behavior workflow presented here uses components from three upstream DataJoint elements (element-lab, element-animal and element-session) and assembled together to a functional workflow.
 
 ### element-lab
 
@@ -20,16 +23,18 @@ The lab and animal management workflow presented here uses components from two D
 ### element-animal
 
 `subject` contains basic information of subjects.
-![subject](images/subject_diagram2.svg)
+![subject](images/subject_diagram.svg)
 
 ### element-session
 `session` is designed to handle metadata related to data collection, including collection datetime, file paths, and notes. Most workflows will include element-session as a starting point for further data entry.
-![session](images/session_diagram2.png)
+![session](images/session_diagram.png)
 
 ### element-trial
-`event` is designed to segment a continuous recording into trials, repeated windows, typically conditions.
+`trial` is designed to segment a continuous recording into trials, repeated windows, typically conditions. Instantaneous or continuous events may occur within trials.
 (TBD Diagram here)
 
+`event` is designed to handle paradigms that designate events (e.g., subject behavior) within a session without trials.
+(TBD Diagram here)
 
 ## Installation instructions
 
@@ -136,10 +141,38 @@ create a new file `dj_local_conf.json` with the following template:
 
 + At this point the setup of this workflow is complete.
 
+## Running this workflow
+
+For new users, we recommend using the following notebooks to run through the workflow.
++ [01-Explore_Workflow](notebooks/01-Explore_Workflow.ipynb)
++ [02-Other_Notebook](notebooks/02-Other_Notebook.ipynb)
+
+Once you have your data directory configured with the above convention,
+populating the pipeline with your data amounts to these 3 steps:
+
+1. [Connect to a database](https://tutorials.datajoint.io/setting-up/get-database.html)
+
+2. Insert meta information (e.g. subjects, sessions, etc.) - modify:
+    + user_data/subjects.csv
+    + user_data/sessions.csv
+
+3. Import session data - run:
+    ```
+    python workflow_trial/ingest.py
+    ```
+
+4. Import continuous behavioral data and populate trial or event tables within python:
+    ```python
+    trial.BehavioralRecording.populate()
+    # OR
+    event.BehavioralRecording.populate()
+    ```
+
++ For inserting new subjects, sessions or new analysis parameters, adjust the relevant csv and rerun the `ingest.py` script.
+
++ In fact, these steps can be executed as scheduled jobs that will automatically process any data newly placed into the `get_trial_root_dir`.
 
 ## Interacting with the DataJoint pipeline and exploring data
-
-+ [Connect to database](https://tutorials.datajoint.io/setting-up/get-database.html)
 
 + Import tables
     ```
@@ -152,14 +185,14 @@ create a new file `dj_local_conf.json` with the following template:
     lab.Lab()
     subject.Subject()
     session.Session()
-    pose.DLCModel()
+    trial.Trial()
     ```
 
 + If required to drop all schemas, the following is the dependency order.
     ```
     from workflow_trial.pipeline import *
 
-    pose.schema.drop()
+    trial.schema.drop()
     session.schema.drop()
     subject.schema.drop()
     lab.schema.drop()

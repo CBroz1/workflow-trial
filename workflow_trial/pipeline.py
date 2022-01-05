@@ -1,7 +1,7 @@
 import datajoint as dj
 
 from element_lab import lab
-from element_animal import subject, genotyping
+from element_animal import subject
 from element_session import session
 
 from element_animal.subject import Subject
@@ -23,7 +23,7 @@ subject.activate(db_prefix + 'subject', linking_module=__name__)
 Experimenter = lab.User
 session.activate(db_prefix + 'session', linking_module=__name__)
 
-# Activate "behavior" schema ------------------------------------------------------
+# Activate "behavior" schema --------------------------------
 
-trial.activate(db_prefix + 'pose', linking_module=__name__)
-# or event?
+trial.activate(db_prefix + 'trial', linking_module=__name__)
+# or event? both?
