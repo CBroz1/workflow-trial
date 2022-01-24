@@ -1,8 +1,4 @@
 '''
-fresh docker:
-    docker run --name wf-sess -p 3306:3306 -e \
-    MYSQL_ROOT_PASSWORD=tutorial datajoint/mysql
-dependencies: pip install pytest pytest-cov
 run all tests:
     pytest -sv --cov-report term-missing --cov=workflow-session \
     -p no:warnings tests/
