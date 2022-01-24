@@ -18,12 +18,14 @@ The trialized behavior workflow presented here uses components from three upstre
 
 ### element-lab
 
-![lab](images/lab_diagram.svg)
+![element-lab](
+https://github.com/datajoint/element-lab/raw/main/images/element_lab_diagram.svg)
 
 ### element-animal
 
 `subject` contains basic information of subjects.
-![subject](images/subject_diagram.svg)
+![element-animal](
+https://github.com/datajoint/element-animal/blob/main/images/subject_diagram.svg)
 
 ### element-session
 `session` is designed to handle metadata related to data collection, including collection datetime, file paths, and notes. Most workflows will include element-session as a starting point for further data entry.
@@ -31,10 +33,8 @@ The trialized behavior workflow presented here uses components from three upstre
 
 ### element-trial
 `trial` is designed to segment a continuous recording into trials, repeated windows, typically conditions. Instantaneous or continuous events may occur within trials.
-(TBD Diagram here)
 
 `event` is designed to handle paradigms that designate events (e.g., subject behavior) within a session without trials.
-(TBD Diagram here)
 
 ## Installation instructions
 

@@ -16,17 +16,19 @@ Build a workflow for trialized data using DataJoint Elements
 
 with open(path.join(here, 'requirements.txt')) as f:
     requirements = f.read().splitlines()
+with open(path.join(here, pkg_name, 'version.py')) as f:
+    exec(f.read())
 
 setup(
     name='workflow-trial',
-    version='0.0.1',
+    version=__version__,
     description="DataJoint Elements for Trialized Experiments",
     long_description=long_description,
     author='DataJoint',
-    author_email='info@vathes.com',
+    author_email='info@datajoint.com',
     license='MIT',
-    url='https://github.com/datajoint/workflow-behavior',
-    keywords='neuroscience behavior deeplabcut datajoint',
+    url='https://github.com/datajoint/workflow-trial',
+    keywords='neuroscience trial datajoint',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=requirements,
 )
