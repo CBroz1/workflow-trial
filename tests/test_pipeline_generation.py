@@ -6,6 +6,7 @@
 
 from . import pipeline
 
+__all__ = ['pipeline']
 
 def test_generate_pipeline(pipeline):
     session = pipeline['session']

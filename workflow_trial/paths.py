@@ -1,7 +1,7 @@
 import datajoint as dj
 
 
-def get_trial_root_dir():
+def get_trial_root_data_dir():
     root_data_dirs = dj.config.get('custom', {}).get('trial_root_data_dir', None)
     return root_data_dirs if root_data_dirs else None
 

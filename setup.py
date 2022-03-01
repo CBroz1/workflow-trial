@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 from os import path
-import sys
 
+pkg_name = 'workflow_trial'
 here = path.abspath(path.dirname(__file__))
 
 long_description = """"

@@ -3,6 +3,7 @@ import datajoint as dj
 from element_lab import lab
 from element_animal import subject
 from element_session import session
+from element_trial import trial, event
 
 from element_animal.subject import Subject
 from element_lab.lab import Source, Lab, Protocol, User, Project
@@ -12,6 +13,9 @@ if 'custom' not in dj.config:
     dj.config['custom'] = {}
 
 db_prefix = dj.config['custom'].get('database.prefix', '')
+
+__all__ = ['Subject', 'Source', 'Lab', 'Protocol', 'User', 'Project', 'Session',
+           'trial', 'event']
 
 
 # Activate "lab", "subject", "session" schema -------------

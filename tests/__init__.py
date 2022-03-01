@@ -51,11 +51,11 @@ def pipeline():
     """ Loads workflow_trial.pipeline lab, session, subject"""
     from workflow_trial import pipeline
 
-    yield {'event': pipeline.event,
-           'trial': pipeline.trial,
+    yield {'event':   pipeline.event,
+           'trial':   pipeline.trial,
            'subject': pipeline.subject,
            'session': pipeline.session,
-           'lab': pipeline.lab,}
+           'lab':     pipeline.lab}
 
     if _tear_down:
         pipeline.event.BehaviorEvent.delete()

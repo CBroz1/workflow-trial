@@ -28,7 +28,7 @@ RUN mkdir /main/element-session
 COPY --chown=anaconda:anaconda ./element-session /main/element-session
 RUN pip install -e /main/element-session
 COPY --chown=anaconda:anaconda ./workflow-session /main/workflow-session
-# RUN rm -f /main/workflow-session/dj_local_conf.json
+RUN rm -f /main/workflow-session/dj_local_conf.json
 
 # Install the workflow
 RUN pip install /main/workflow-session

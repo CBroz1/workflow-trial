@@ -17,7 +17,7 @@ services:
       context: ../
       dockerfile: ./workflow-trial/Dockerfile.test
     env_file: .env
-    image: workflow_trial:0.0.0b2
+    image: workflow_trial:0.0.0a0
     environment:
       - DJ_HOST=db
       - DJ_USER=root

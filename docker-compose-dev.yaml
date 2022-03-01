@@ -17,7 +17,7 @@ services:
       context: ../
       dockerfile: ./workflow-trial/Dockerfile.dev
     env_file: .env
-    image: workflow_trial_dev:0.0.0b2
+    image: workflow_trial_dev:0.0.0a0
     volumes:
       - ./apt_requirements.txt:/tmp/apt_requirements.txt
       - ../element-lab:/main/element-lab
